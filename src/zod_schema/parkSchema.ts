@@ -19,6 +19,9 @@ export const parkSchema = z.object({
         .number({ required_error: 'Tickets is required !' }),
 
         price: z.number({ required_error: 'Price is required !' }),
+
+
+       
       
     }),
   });
