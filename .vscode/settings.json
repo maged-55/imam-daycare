@@ -1,0 +1,15 @@
+// {
+//     "tsErrorTranslator.showFullTranslation": true,
+//     "problems.showCurrentInStatus": false
+// }
+
+{
+    
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    ],
+    
+  }

@@ -7,6 +7,8 @@ import {
   studentSchemaType,
 } from '../zod_schema/studentSchema';
 
+// app.use(json)
+
 const router = express.Router();
 
 let student: studentSchemaType[] = [];
