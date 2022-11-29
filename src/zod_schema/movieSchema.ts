@@ -37,7 +37,7 @@ export const movieSchema = z.object({
   export const rateMovieSchema = z.object({
    
     params: z.object({
-      rating: z.number({required_error: "you should enter the number"}),
+      ratingg: z.number({required_error: "you should enter the number"}),
     })
   });
   export type movieSchemaType = TypeOf<typeof movieSchema>['body'];
