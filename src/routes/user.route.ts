@@ -15,14 +15,18 @@ import {
     regSchema
 
 } from '../zod_schema/user.Schema';
+import {authorize, protect} from '../middleware/auth';
 
 
 
 const router = express.Router();
 
 router.post('/register', register);
-router.post('/login', loginhand);
-router.get('/', getAllUsers);
+router.post('/login',loginhand);
+
+// here only admin can access to show the users
+router.get('/',protect,authorize("admin") ,getAllUsers);
+
 
 
 export default router;

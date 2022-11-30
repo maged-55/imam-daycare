@@ -1,10 +1,12 @@
 import { User1 } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { NextFunction, Request, Response } from 'express';
-import { prisma ,} from '../../config/db';
+import { prisma } from '../../config/db';
 import argon2 from 'argon2';
 import { isValid } from 'zod';
 import {logInSchema,logInSchemaType} from '../zod_schema/user.Schema'
+var jwt = require('jsonwebtoken');
+
 
 
 export const getAllUsers = async (req: Request, res: Response) => {
@@ -29,9 +31,20 @@ try {
             return res.status(401).json({
                 message: 'Wrong username or password',
               }); }
+
+              const token = jwt.sign(
+                { id: user.id,role:user.role },
+                process.env.JWT_SECRET as string,
+                {expiresIn:'1d'}
+              );
+
+
+
       
       return res.status(200).json({
         message: 'Welcome back !',
+        token
+
       });
     
 } catch (error) {
@@ -50,7 +63,7 @@ try {
 };
 
 export const register = async (req: Request, res: Response) => {
-  const {username,password,email} = req.body as User1;
+  const {username,password,email,role} = req.body as User1;
   const hash  = await argon2.hash(password);
 try {
 
@@ -59,7 +72,8 @@ try {
         data: {
             username,
             password:hash,
-            email
+            email,
+            role
                 
           },
     
