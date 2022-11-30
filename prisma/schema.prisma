@@ -9,54 +9,29 @@ datasource db {
   relationMode = "prisma"
 }
 
-model User {
+model Student {
   id       String @id @default(uuid())
-  username String @unique
-  password String
-  loan     Loan[]
+  name String @unique
+  age Int
+  major String
+ 
 }
 
-model Books {
+model Classroom {
   id    String @id @default(uuid())
   name  String @unique
-  genre String
-  loan  Loan[]
+ 
 }
 
-model Loan {
+model Teacher {
   id     String @id @default(uuid())
-  userId String
-  bookID String
-  userid User   @relation(fields: [userId], references: [id])
-  bookid Books  @relation(fields: [bookID], references: [id])
+  name String
 }
 
-// model customer {
-//   id        String   @id @default(uuid())
-//   name      String   @unique
-//   genre     Rule
-//   rating    Int
-//   duration  Int
-//   createdat DateTime @default(now())
-// }
-
-// model user {
-//   id          String @id @default(uuid())
-//   username    String
-//   password    Int
-//   email       String @unique
-//   role        Role
-//   joiningYear String
-//   age         Int
-// }
-
-// enum Rule {
-//   drama
-//   action
-//   comedy
-// }
-
-// enum Role {
-//   admin
-//   user
-// }
+model User1 {
+  id String @id @default(uuid())
+  username String @unique
+  password String
+  email String @unique
+ 
+}
