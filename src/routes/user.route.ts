@@ -6,7 +6,7 @@ import {
     // getUserHandler,
     register,
     getAllUsers,
-    login,
+    loginhand,
   
 } from '../controller/user.controller';
 import {
@@ -21,7 +21,7 @@ import {
 const router = express.Router();
 
 router.post('/register', register);
-router.get('/login', login);
+router.post('/login', loginhand);
 router.get('/', getAllUsers);
 
 

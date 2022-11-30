@@ -10,28 +10,35 @@ datasource db {
 }
 
 model Student {
-  id       String @id @default(uuid())
-  name String @unique
-  age Int
+  id    String @id @default(uuid())
+  name  String @unique
+  age   Int
   major String
- 
+  classroomid String?
+  Classroom Classroom[]
+
+
+
 }
 
 model Classroom {
-  id    String @id @default(uuid())
-  name  String @unique
- 
+  id        String  @id @default(uuid())
+  name      String  @unique
+  Studentid String?
+  teacherid String?
+  student   Student? @relation(fields: [Studentid], references: [id])
+  teacher   Teacher? @relation(fields: [teacherid], references: [id])
 }
 
 model Teacher {
-  id     String @id @default(uuid())
+  id   String @id @default(uuid())
   name String
+  Classroom Classroom[]
 }
 
 model User1 {
-  id String @id @default(uuid())
+  id       String @id @default(uuid())
   username String @unique
   password String
-  email String @unique
- 
+  email    String @unique
 }
