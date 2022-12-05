@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { userInfo } from 'os';
 
-interface Iuser{
+export interface Iuser{
     id:string,
     role:string,
 
@@ -19,14 +19,12 @@ const protect = (req: Request, res: Response, next: NextFunction) => {
              });
         }
         const token = header?.split(' ')[1] as string;
-        const user = jwt.verify(token,process.env.JWT_SECRET as string );
+        const user = jwt.verify(token,process.env.JWT_SECRET as string ) as Iuser;
         console.log(user);
 
         res.locals.user = user;
 
-        
-
-
+    
         next();
     } catch (error) {
         console.log(error);

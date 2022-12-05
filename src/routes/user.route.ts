@@ -5,7 +5,7 @@ import {
   
     // getUserHandler,
     register,
-    getAllUsers,
+    getAllUsersWithPasswordHash,
     loginhand,
   
 } from '../controller/user.controller';
@@ -21,11 +21,12 @@ import {authorize, protect} from '../middleware/auth';
 
 const router = express.Router();
 
-router.post('/register', register);
-router.post('/login',loginhand);
+router.post('/register',validate(regSchema), register);
+router.post('/login',validate(logInSchema),loginhand);
 
 // here only admin can access to show the users
-router.get('/',protect,authorize("admin") ,getAllUsers);
+router.get('/',protect,authorize("admin") ,getAllUsersWithPasswordHash);
+
 
 
 

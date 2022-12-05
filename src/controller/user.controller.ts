@@ -1,50 +1,53 @@
-import { User1 } from '@prisma/client';
+import { User } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { NextFunction, Request, Response } from 'express';
-import { prisma } from '../../config/db';
+import { prisma } from '../config/db';
 import argon2 from 'argon2';
 import { isValid } from 'zod';
 import {logInSchema,logInSchemaType} from '../zod_schema/user.Schema'
-var jwt = require('jsonwebtoken');
+let jwt = require('jsonwebtoken');
 
 
+// here we got all users with id ,username and password hash
 
-export const getAllUsers = async (req: Request, res: Response) => {
-  const users = await prisma.user1.findMany();
+export const getAllUsersWithPasswordHash = async (req: Request, res: Response) => {
+  const users = await prisma.user.findMany(
+    {select:{
+        id:true,
+        username:true,
+        password:true,
+        // email:true,
+        // blog:true
+        
+  }}
+  );
   res.status(200).json(users);
 };
 
 export const loginhand = async (req: Request, res: Response, next:NextFunction)  => {
-  const {username,password} = req.body as User1;
+  const {username,password} = req.body as User;
 try {
-    const user = await prisma.user1.findUnique({
+    const user = await prisma.user.findUnique({
         where:{username}
       });
       if(!user){
         return res.status(401).json({
             message: 'Wrong username or password',
           }); }
-    
           const vaildPassword = await argon2.verify(user.password, password)
-    
           if(!vaildPassword){
             return res.status(401).json({
                 message: 'Wrong username or password',
               }); }
 
               const token = jwt.sign(
-                { id: user.id,role:user.role },
+                { id: user.id },
                 process.env.JWT_SECRET as string,
                 {expiresIn:'1d'}
               );
-
-
-
-      
       return res.status(200).json({
         message: 'Welcome back !',
         token
-
       });
     
 } catch (error) {
@@ -59,24 +62,19 @@ try {
     });}
     
 }
-
 };
-
 export const register = async (req: Request, res: Response) => {
-  const {username,password,email,role} = req.body as User1;
+  const {username,password,email} = req.body as User;
   const hash  = await argon2.hash(password);
 try {
 
-    await prisma.user1.create({
+    await prisma.user.create({
    
         data: {
             username,
             password:hash,
             email,
-            role
-                
           },
-    
   });
   res.status(201).json({
     message: 'New user created !',
@@ -93,7 +91,5 @@ try {
       message: 'Server Error !',
     });}
 }
-
-    
 };
 

@@ -9,39 +9,42 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Student {
-  id        String      @id @default(uuid())
-  name      String      @unique
-  age       Int
-  major     String
-  Classroom Classroom[]
+// model Student {
+//   id        String      @id @default(uuid())
+//   name      String      @unique
+//   age       Int
+//   major     String
+//   Classroom Classroom[]
+// }
+
+// model Classroom {
+//   id        String   @id @default(uuid())
+//   name      String   
+//   Studentid String
+//   teacherid String  @unique
+//   student   Student @relation(fields: [Studentid], references: [id])
+//   teacher   Teacher @relation(fields: [teacherid], references: [id])
+// }
+
+// model Teacher {
+//   id        String     @id @default(uuid())
+//   name      String
+//   Classroom Classroom?
+// }
+
+model Blog {
+  id      String @id @default(uuid())
+  title   String
+  message String
+  userid  String
+  user User @relation(fields: [userid], references: [id])
+
 }
 
-model Classroom {
-  id        String   @id @default(uuid())
-  name      String   
-  Studentid String
-  teacherid String  @unique
-  student   Student @relation(fields: [Studentid], references: [id])
-  teacher   Teacher @relation(fields: [teacherid], references: [id])
-}
-
-model Teacher {
-  id        String     @id @default(uuid())
-  name      String
-  Classroom Classroom?
-}
-
-model User1 {
+model User {
   id       String @id @default(uuid())
   username String @unique
   password String
-  role Rule
-  email String @unique
-} 
-
-enum Rule {
-  admin
-  user
-  
+  email    String
+  blog     Blog[]
 }
