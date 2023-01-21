@@ -14,12 +14,20 @@ const app = express();
 
 connectDB();
 
-app.use(express.json())
+app.use(express.json());
+app.use(express.static('./client/build'));
+
 const api_key=process.env.API_KEY;
 console.log(api_key);
 
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/blog', blogRouter);
+
+app.use((req:Request,res:Response,next:NextFunction) => {
+    return res.sendFile('./client/build/index.html');
+
+
+});
 
 
 

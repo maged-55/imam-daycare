@@ -35,9 +35,7 @@ const protect = (req: Request, res: Response, next: NextFunction) => {
         
 
     }
-
 }
-
 const authorize = (role :string)=>(req: Request, res: Response, next: NextFunction) =>{
    const user =res.locals.user as Iuser;
     if(user.role!==role){

@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import RegisterForm from '../components/registerForm';
+import Navbar from '../components/navbar/Navbar';
 
 export const RegisterPage = ()=> {
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -30,7 +33,7 @@ export const RegisterPage = ()=> {
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password, email }),
+                body: JSON.stringify({ fname,lname,username, password, email }),
               });
         
               const data = await request.json();
@@ -51,7 +54,7 @@ export const RegisterPage = ()=> {
                 duration: 3000,
                 position: 'top',
               });
-            //   navigate('/login');
+              navigate('/login');
             } catch (error) {
               toast({
                 title: 'Server Error !',
@@ -63,17 +66,20 @@ export const RegisterPage = ()=> {
           };
     
   return (
-    <RegisterForm
-    username={username}
-    setUsername={setUsername}
-    setPassword={setPassword}
-    password={password}
-    password2={password2}
-    setPassword2={setPassword2}
-    setEmail={setEmail}
-    email={email}
-    submitRegister={submitRegister}
-  />
+    <><Navbar links={[{ link: "/login", alias: "تسجيل الدخول" }, { link: "/register", alias: "التسجيل" },]} logo={"https://units.imamu.edu.sa/_layouts/15/NewUnits/img/logo.png"} /><RegisterForm
+      fname={fname}
+      setFname={setFname}
+      lname={lname}
+      setLname={setLname}
+      username={username}
+      setUsername={setUsername}
+      setPassword={setPassword}
+      password={password}
+      password2={password2}
+      setPassword2={setPassword2}
+      setEmail={setEmail}
+      email={email}
+      submitRegister={submitRegister} /></>
 
 
 

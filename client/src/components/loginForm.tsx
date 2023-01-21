@@ -11,8 +11,18 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    Img,
   } from '@chakra-ui/react';
 import { useNavigate ,Link} from 'react-router-dom';
+import Navbar from './navbar/Navbar';
+
+// import Logo from '../img/logo1.png'; 
+let Logo1 = require('../img/logo1.png');
+let Logo2 = require('../img/logo2.png');
+let Logo5 = require('../img/logo5.png');
+
+
+
   
   
     interface ILoginForm {
@@ -35,15 +45,18 @@ import { useNavigate ,Link} from 'react-router-dom';
 
 
     return (
+      
+      <>
+      <Navbar links={[{ link: "/login", alias: "تسجيل الدخول" }, { link: "/register", alias: "التسجيل" },]} logo={"https://units.imamu.edu.sa/_layouts/15/NewUnits/img/logo.png"}/>
       <Flex
         minH={'100vh'}
         align={'center'}
         justify={'center'}
         bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack bg ={"#6AB9A8"} w={"400px"} spacing={10} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
-            <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-        
+            <Heading color={"white"} fontSize={'4xl'}>تسجيل الدخول</Heading>
+
           </Stack>
           <Box
             rounded={'lg'}
@@ -52,33 +65,33 @@ import { useNavigate ,Link} from 'react-router-dom';
             p={8}>
             <Stack spacing={4}>
               <FormControl id="email">
-                <FormLabel>UserName</FormLabel>
+                <FormLabel>اسم المستخدم</FormLabel>
                 <Input
-                   onChange={(e) => setUsername(e.target.value)}
-                 type="username"
-                value={username} />
+                  onChange={(e) => setUsername(e.target.value)}
+                  type="username"
+                  value={username} />
               </FormControl>
               <FormControl id="password">
-                <FormLabel>Password</FormLabel>
+                <FormLabel>كلمة المرور</FormLabel>
                 <Input
-                   onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
-                value={password} />
+                  value={password} />
               </FormControl>
               <Stack spacing={10}>
                 <Stack
                   direction={{ base: 'column', sm: 'row' }}
                   align={'start'}
                   justify={'space-between'}>
-                  <Checkbox>Remember me</Checkbox>
-                  <Link 
-                   to='/register'>don't hava a account?</Link>
+                  
+                  <Link
+                    to='/register'>ليس لديك حساب ؟ </Link>
                 </Stack>
                 <Button onClick={submitLogin}
-                  bg={'blue.400'}
+                  bg={'#b96a7b'}
                   color={'white'}
                   _hover={{
-                    bg: 'blue.500',
+                    bg: '#6AB9A8',
                   }}>
                   Sign in
                 </Button>
@@ -86,7 +99,7 @@ import { useNavigate ,Link} from 'react-router-dom';
             </Stack>
           </Box>
         </Stack>
-      </Flex>
+      </Flex></>
     );
   }
   export default LoginForm;

@@ -1,6 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -9,42 +8,9 @@ datasource db {
   relationMode = "prisma"
 }
 
-// model Student {
-//   id        String      @id @default(uuid())
-//   name      String      @unique
-//   age       Int
-//   major     String
-//   Classroom Classroom[]
-// }
-
-// model Classroom {
-//   id        String   @id @default(uuid())
-//   name      String   
-//   Studentid String
-//   teacherid String  @unique
-//   student   Student @relation(fields: [Studentid], references: [id])
-//   teacher   Teacher @relation(fields: [teacherid], references: [id])
-// }
-
-// model Teacher {
-//   id        String     @id @default(uuid())
-//   name      String
-//   Classroom Classroom?
-// }
-
-model Blog {
-  id      String @id @default(uuid())
-  title   String
-  message String
-  userid  String
-  user User @relation(fields: [userid], references: [id])
-
-}
-
-model User {
-  id       String @id @default(uuid())
-  username String @unique
-  password String
-  email    String
-  blog     Blog[]
+model users {
+  user_id BigInt  @id @unique(map: "user_id") @default(autoincrement()) @db.UnsignedBigInt
+  name    String? @db.VarChar(255)
+  email   String  @unique(map: "email") @db.VarChar(255)
+  isAdmin Boolean @default(false)
 }
