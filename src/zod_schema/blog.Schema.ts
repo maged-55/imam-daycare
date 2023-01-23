@@ -2,37 +2,49 @@ import {z, TypeOf} from 'zod';
 
 
 
-export const addBlogSchema = z.object({
+export const addRequestSchema = z.object({
     body: z.object({
     
 
-        title: z
-        .string({ required_error: 'username is required !' })
-        .min(3, 'Title must be greater than 2')
-        .max(15, 'Title must be smaller than 15'),
-        message: z
-        .string({ required_error: 'Message is required !' })
-        .min(7, 'Message must be greater than 6')
-        .max(155, 'Message must be smaller than 155'),
+      fname: z
+      .string({ required_error: 'username is required !' })
+      .min(2, 'first name must be greater than 1')
+      .max(15, 'First name must be smaller than 15'),
+
+      lname: z
+      .string({ required_error: 'username is required !' })
+      .min(2, 'first name must be greater than 1')
+      .max(15, 'First name must be smaller than 15'),
+
+      dateOfBirth:z
+      .string({required_error: 'dateOfBirth is required !'}),
+      image: z
+      .string({required_error: 'image is required !'}),
     }),
   });
-  export type addBlogSchemaType = TypeOf<typeof addBlogSchema>['body'];
+  export type addRequestSchemaType = TypeOf<typeof addRequestSchema>['body'];
 
   export const regSchema = z.object({
     body: z.object({
     
    
-        username: z
+        fname: z
         .string({ required_error: 'username is required !' })
-        .min(3, 'username must be greater than 2')
-        .max(15, 'username must be smaller than 15'),
+        .min(2, 'first name must be greater than 1')
+        .max(15, 'First name must be smaller than 15'),
 
-        password:z
-        .string({required_error: 'Password is required !'}),
-        email: z
-        .string().email({ message: "Invalid email address" }),
-        
-       
+        lname: z
+        .string({ required_error: 'username is required !' })
+        .min(2, 'first name must be greater than 1')
+        .max(15, 'First name must be smaller than 15'),
+
+        dateOfBirth:z
+        .string({required_error: 'dateOfBirth is required !'}),
+        image: z
+        .string({required_error: 'image is required !'}),
+
+        // .string().email({ message: "Invalid email address" }),
+      
     }),
   });
   export type regSchemaType = TypeOf<typeof regSchema>['body'];

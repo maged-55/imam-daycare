@@ -20,14 +20,14 @@ import {
   
   interface IRegisterForm {
     username: string;
-    fname : string;
-    lname : string;
+    firstname : string;
+    lastname : string;
     password: string;
     password2: string;
     email :  string;
     submitRegister: () => Promise<void>;
-    setFname:React.Dispatch<React.SetStateAction<string>>
-    setLname:React.Dispatch<React.SetStateAction<string>>
+    setfirstname:React.Dispatch<React.SetStateAction<string>>
+    setlastname:React.Dispatch<React.SetStateAction<string>>
     setUsername: React.Dispatch<React.SetStateAction<string>>;
     setPassword: React.Dispatch<React.SetStateAction<string>>;
     setPassword2: React.Dispatch<React.SetStateAction<string>>;
@@ -36,13 +36,15 @@ import {
   
   const RegisterForm = ( {
     username ,
-    fname,
-    lname,
+    firstname,
+    lastname,
     password,
     email,
     password2,
     setPassword2,
   submitRegister,
+  setfirstname,
+  setlastname,
   setUsername,
   setPassword,
   setEmail,
@@ -160,13 +162,19 @@ import {
                
                 id="firstName" isRequired>
                   <FormLabel>الإسم الأول</FormLabel>
-                  <Input  type="text" />
+                  <Input 
+                  onChange={(e) => setfirstname(e.target.value)}
+                  value={firstname}
+                  type="text" />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>الإسم الأخير</FormLabel>
-                  <Input type="text" />
+                  <Input 
+                    onChange={(e) => setlastname(e.target.value)}
+                    value={lastname}
+                  type="text" />
                 </FormControl>
               </Box>
             </HStack>

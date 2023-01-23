@@ -5,8 +5,8 @@ import RegisterForm from '../components/registerForm';
 import Navbar from '../components/navbar/Navbar';
 
 export const RegisterPage = ()=> {
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
+  const [firstName, setfirstName] = useState('');
+  const [lastName, setlastName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -33,7 +33,7 @@ export const RegisterPage = ()=> {
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ fname,lname,username, password, email }),
+                body: JSON.stringify({ firstName,lastName,username, password, email }),
               });
         
               const data = await request.json();
@@ -66,11 +66,12 @@ export const RegisterPage = ()=> {
           };
     
   return (
-    <><Navbar links={[{ link: "/login", alias: "تسجيل الدخول" }, { link: "/register", alias: "التسجيل" },]} logo={"https://units.imamu.edu.sa/_layouts/15/NewUnits/img/logo.png"} /><RegisterForm
-      fname={fname}
-      setFname={setFname}
-      lname={lname}
-      setLname={setLname}
+    <><Navbar links={[{ link: "/login", alias: "تسجيل الدخول" }, { link: "/register", alias: "التسجيل" },]} logo={"https://units.imamu.edu.sa/_layouts/15/NewUnits/img/logo.png"} />
+    <RegisterForm
+      firstname={firstName}
+      setfirstname={setfirstName}
+      lastname={lastName}
+      setlastname={setlastName}
       username={username}
       setUsername={setUsername}
       setPassword={setPassword}

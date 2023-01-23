@@ -10,19 +10,19 @@ let jwt = require('jsonwebtoken');
 
 // here we got all users with id ,username and password hash
 
-export const getAllUsersWithPasswordHash = async (req: Request, res: Response) => {
-  const users = await prisma.user.findMany(
-    {select:{
-        id:true,
-        username:true,
-        password:true,
-        // email:true,
-        // blog:true
+// export const getAllUsersWithPasswordHash = async (req: Request, res: Response) => {
+//   const users = await prisma.user.findMany(
+//     {select:{
+//         id:true,
+//         username:true,
+//         password:true,
+//         // email:true,
+//         // blog:true
         
-  }}
-  );
-  res.status(200).json(users);
-};
+//   }}
+//   );
+//   res.status(200).json(users);
+// };
 
 export const loginhand = async (req: Request, res: Response, next:NextFunction)  => {
   const {username,password} = req.body as User;
@@ -64,13 +64,15 @@ try {
 }
 };
 export const register = async (req: Request, res: Response) => {
-  const {username,password,email} = req.body as User;
+  const {firstName,lastName,username,password,email} = req.body as User;
   const hash  = await argon2.hash(password);
 try {
 
     await prisma.user.create({
    
         data: {
+          firstName,
+            lastName,
             username,
             password:hash,
             email,
@@ -88,7 +90,7 @@ try {
       });
     }else{
     return res.status(500).json({
-      message: 'Server Error 1111 ! ' ,
+      message: "server error 1111" ,
     });}
 }
 };

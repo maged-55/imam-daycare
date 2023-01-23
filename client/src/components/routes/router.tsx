@@ -6,6 +6,7 @@ import ProtectedRoute from './protectedRouter'
 import Desktop1 from '../../components/Desktop1'
 import Footer from '../Footer';
 import Home from '../Home';
+import Addkid from '../../pages/addKid'
 
 
 function router() {
@@ -19,6 +20,8 @@ function router() {
       <Route path='/login' element={<LoginPage />} />
       <Route path='/ra' element={<Desktop1 />} />
       <Route path='/' element={<Home />} />
+      <Route path='/addkid' element={<Addkid />} />
+
 
 
 

@@ -22,6 +22,14 @@ export const logInSchema = z.object({
         .string({ required_error: 'username is required !' })
         .min(3, 'username must be greater than 2')
         .max(15, 'username must be smaller than 15'),
+        firstname: z
+        .string({ required_error: 'username is required !' })
+        .min(2, 'firstname must be greater than 1')
+        .max(15, 'firstname must be smaller than 15'),
+        lastname: z
+        .string({ required_error: 'username is required !' })
+        .min(2, 'lastname must be greater than 1')
+        .max(15, 'lastname must be smaller than 15'),
 
         password:z
         .string({required_error: 'Password is required !'}),
