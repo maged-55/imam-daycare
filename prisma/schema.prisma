@@ -7,9 +7,7 @@ datasource db {
   url          = env("DATABASE_URL")
   relationMode = "prisma"
   // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-
 }
-
 
 model User {
   // user_id BigInt  @id @unique(map: "user_id") @default(autoincrement()) @db.UnsignedBigInt
@@ -17,7 +15,7 @@ model User {
   firstName String
   lastName  String
   username  String    @unique
-  password String
+  password  String
   role      Role      @default(user)
   email     String    @unique
   request   Request[]
@@ -28,6 +26,7 @@ enum Role {
   admin
 }
 
+// from abdulaziz
 model Request {
   id          String @id @default(uuid())
   fname       String
