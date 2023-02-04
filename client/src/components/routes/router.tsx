@@ -7,6 +7,8 @@ import Desktop1 from '../../components/Desktop1'
 import Footer from '../Footer';
 import Home from '../Home';
 import Addkid from '../../pages/addKid'
+import Requests from '../../pages/requests'
+
 
 
 function router() {
@@ -20,7 +22,10 @@ function router() {
       <Route path='/login' element={<LoginPage />} />
       <Route path='/ra' element={<Desktop1 />} />
       <Route path='/' element={<Home />} />
-      <Route path='/addkid' element={<Addkid />} />
+      <Route path='/addkid/:id' element={<Addkid />} />
+      <Route path='/request' element={<Requests />} />
+
+
 
 
 

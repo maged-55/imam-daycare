@@ -41,6 +41,7 @@ export const LoginPage = ()=> {
                 position: 'top',
               });
               localStorage.setItem('token', data.token);
+              localStorage.setItem('id', data.id);
               navigate('/');
             } catch (error) {
               toast({

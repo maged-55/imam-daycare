@@ -14,12 +14,12 @@ var jwt = require('jsonwebtoken');
 export const getAllRequestHandler = async (req: Request, res: Response) => {
     try {
         
-const user = res.locals.user as Iuser;;
+// const user = res.locals.user as Iuser;;
 
-  const blogs = await prisma.request.findMany({
-    where:{user_id:user.id}
+  const allreq = await prisma.request.findMany({
+   
 });
-  res.status(200).json(blogs);
+  res.status(200).json(allreq);
 
 } catch (error) {
     console.log(error);     

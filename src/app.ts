@@ -2,7 +2,7 @@ import express from 'express';
 import   { NextFunction, Request, Response }  from "express";
 import { z } from 'zod';
 import userRouter from './routes/user.route';
-import blogRouter from './routes/blog.route';
+import reqRouter from './routes/req.route';
 
 
 
@@ -21,7 +21,7 @@ const api_key=process.env.API_KEY;
 console.log(api_key);
 
 app.use('/api/v1/user', userRouter);
-app.use('/api/v1/blog', blogRouter);
+app.use('/api/v1/req', reqRouter);
 
 app.use((req:Request,res:Response,next:NextFunction) => {
     return res.sendFile('./client/build/index.html');

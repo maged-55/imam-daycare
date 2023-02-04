@@ -45,9 +45,11 @@ try {
                 process.env.JWT_SECRET as string,
                 {expiresIn:'1d'}
               );
+              const id = user.id
       return res.status(200).json({
         message: 'Welcome back !',
-        token
+        token,
+        id,
       });
     
 } catch (error) {
@@ -92,6 +94,49 @@ try {
     return res.status(500).json({
       message: "server error 1111" ,
     });}
+}
+};
+
+
+
+
+export const getuserhand = async (req: Request, res: Response, next:NextFunction)  => {
+  const {username,password} = req.body as User;
+try {
+    const user = await prisma.user.findUnique({
+        where:{username}
+      });
+      if(!user){
+        return res.status(401).json({
+            message: 'Wrong username or password',
+          }); }
+          const vaildPassword = await argon2.verify(user.password, password)
+          if(!vaildPassword){
+            return res.status(401).json({
+                message: 'Wrong username or password',
+              }); }
+
+              const token = jwt.sign(
+                { id: user.id },
+                process.env.JWT_SECRET as string,
+                {expiresIn:'1d'}
+              );
+      return res.status(200).json({
+        message: 'Welcome back !',
+        token
+      });
+    
+} catch (error) {
+    const prismaError = error as PrismaClientKnownRequestError;
+    if (prismaError.code == 'P2002') {
+      return res.status(400).json({
+        message: 'username or email have been used before',
+      });
+    }else{
+    return res.status(500).json({
+      message: 'Server Error !',
+    });}
+    
 }
 };
 
